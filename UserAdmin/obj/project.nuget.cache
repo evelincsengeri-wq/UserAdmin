@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "4F/ZIR0oJ9A=",
+  "dgSpecHash": "UasMioj+UQE=",
   "success": true,
   "projectFilePath": "C:\\Users\\eveli\\Desktop\\Tanfolyam\\WPF\\UserAdmin\\UserAdmin\\UserAdmin.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\eveli\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\eveli\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.2\\microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\eveli\\.nuget\\packages\\mysqlconnector\\2.6.2\\mysqlconnector.2.6.2.nupkg.sha512"
+  ],
   "logs": []
 }
