@@ -6,9 +6,11 @@ namespace UserAdmin.Models
 {
     class User
     {
-        public int? id { get; set; }
-        public string? username { get; set; }
-        public string? password { get; set; }
-        public DateTime registeredAt { get; set; }
+        public int? Id { get; set; }
+        public string? Username { get; set; }
+
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+        public DateTime RegisteredAt { get; set; }
     }
 }
