@@ -31,8 +31,8 @@ namespace UserAdmin.Views
         {
             var username = UsernameBox.Text.Trim();   //A felhasználónév mező értékének lekérése
             var email = EmailBox.Text;         //Az email mező értékének lekérése
-            var password = PasswordBoxInput.Text; //A jelszó mező értékének lekérése
-            var confirmPassword = ConfirmPasswordBox.Text; //A jelszó megerősítés mező értékének lekérése
+            var password = PasswordBoxInput.Password; //A jelszó mező értékének lekérése
+            var confirmPassword = ConfirmPasswordBox.Password; //A jelszó megerősítés mező értékének lekérése
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(confirmPassword)) //Ha bármelyik mező üres
             {
