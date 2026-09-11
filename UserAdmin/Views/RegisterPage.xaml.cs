@@ -69,7 +69,7 @@ namespace UserAdmin.Views
 
         private void Login_Click(object sender, RoutedEventArgs e)     //A bejelentkezés gomb eseménykezelője
         {
-
+            NavigationService.Navigate(new LoginPage());
         }
     }
 }

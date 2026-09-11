@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Web;
 using UserAdmin.Models;
 
 namespace UserAdmin.Services
@@ -56,10 +57,38 @@ VALUES (@Username,@Email,@Password,@RegisteredAt)";
                 connection.Close();
                 return user; // Return the found user
             }
+            else
+            {
+                connection.Close();
+                return null; // Return null if no user is found with the given email
+            }
+        }
 
+        public List<User> GetAll()
+        {
+            var users = new List<User>();
+            using var connection = new MySqlConnection(ConnectionString); 
+            connection.Open();
 
-            connection.Close(); //Kapcsolat lezárása az adatbázissal
-            return null;  // Return null if no user is found with the given email
-        } 
+            string sql = @"SELECT `username`,`email`,`password`,`registeredAt` FROM `users` ORDER BY `registeredAt` DESC";
+
+            var cmd = new MySqlCommand(sql, connection);
+            var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                var user = new User
+                {
+                    Username = reader.GetString(0),
+                    Email = reader.GetString(1),
+                    Password = reader.GetString(2),
+                    RegisteredAt = reader.GetDateTime(3)
+                };
+                users.Add(user);
+            }
+
+            connection.Close();
+            return users;
+        }
     }
 }
