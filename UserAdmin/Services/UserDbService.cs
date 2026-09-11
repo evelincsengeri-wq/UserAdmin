@@ -53,6 +53,7 @@ VALUES (@Username,@Email,@Password,@RegisteredAt)";
                     Password = reader.GetString(2),
                     RegisteredAt = reader.GetDateTime(3)
                 };
+                connection.Close();
                 return user; // Return the found user
             }
 
