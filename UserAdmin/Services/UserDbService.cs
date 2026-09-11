@@ -12,11 +12,11 @@ namespace UserAdmin.Services
 
         public void Add(User user)
         {
-           var connection = new MySqlConnection(ConnectionString);  //Kapcsolat létrehozása az adatbázissal
+            var connection = new MySqlConnection(ConnectionString);  //Kapcsolat létrehozása az adatbázissal
             connection.Open(); //Kapcsolat megnyitása az adatbázissal
 
             string sql = @"INSERT INTO `users`(`username`, `email`, `password`, `registeredAt`) 
-VALUES (@Username,@Email,@Password,@RegisteredAt)"; 
+VALUES (@Username,@Email,@Password,@RegisteredAt)";
 
             var cmd = new MySqlCommand(sql, connection); //SQL lekérdezés létrehozása
 
@@ -28,5 +28,37 @@ VALUES (@Username,@Email,@Password,@RegisteredAt)";
 
             connection.Close();
         }
+
+        // Fixed method: implement FindByEmail and return null if not found.
+        public User? FindByEmail(string email)
+        {
+            using var connection = new MySqlConnection(ConnectionString); //Kapcsolat létrehozása az adatbázissal
+            connection.Open();
+
+            string sql = @"SELECT `username`,`email`,`password`,`registeredAt` FROM `users` WHERE `email`=@email";  //SQL lekérdezés létrehozása
+
+            var cmd = new MySqlCommand(sql, connection);   //SQL lekérdezés létrehozása
+
+            cmd.Parameters.AddWithValue("@email", email); //SQL lekérdezés paraméterek hozzáadása
+
+            var reader = cmd.ExecuteReader(); //SQL lekérdezés végrehajtása
+
+            
+            if (reader.Read())             //Ha van találat az adatbázisban
+            {
+                var user = new User         //Új User objektum létrehozása
+                {
+                    Username = reader.GetString(0),
+                    Email = reader.GetString(1),                         //SQL lekérdezés eredményének lekérése
+                    Password = reader.GetString(2),
+                    RegisteredAt = reader.GetDateTime(3)
+                };
+                return user; // Return the found user
+            }
+
+
+            connection.Close(); //Kapcsolat lezárása az adatbázissal
+            return null;  // Return null if no user is found with the given email
+        } 
     }
 }
